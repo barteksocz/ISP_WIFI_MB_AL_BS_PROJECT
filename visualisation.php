@@ -17,22 +17,25 @@ Bartosz Soczynski</b>
 		global $magnetic_sensor_data;
 		global $distance_sensor_data;		
 
-		echo "<center><table border=1 width=25%><tr><td>&emsp; Temperature [&deg;C] &emsp;</td><td width=30%> &emsp;"; 
-	        if ($temperature_sensor_data != -1)
+		echo "<center><table border=1 width=25%><tr><td>&nbsp; Temperature [&deg;C]</td><td width=30%>"; 
+	        echo "&nbsp; &nbsp;";
+		if ($temperature_sensor_data != -1)
 	            echo "$temperature_sensor_data";
 		else
 		    echo "-";
-		echo "&emsp; </td></tr><tr><td>&emsp; Magnetic sensor state [0/1] &emsp;</td><td> &emsp;"; 
+		echo "</td></tr><tr><td>&nbsp; Magnetic sensor state [0/1]</td><td>"; 
+		echo "&nbsp; &nbsp;"	;
 		if ($magnetic_sensor_data != -1)
 		    echo $magnetic_sensor_data;
 		else
 		    echo "-";
-		echo "&emsp; </td></tr><tr><td>&emsp; Distance [cm] &emsp; </td><td> &emsp;";
+		echo "</td></tr><tr><td>&nbsp; Distance [cm]</td><td>";
+		echo "&nbsp; &nbsp;";
 		if ($distance_sensor_data != -1)
           	    echo $distance_sensor_data;
 		else
 		    echo "-";
-		echo "&emsp; </td></tr></table></center>";
+		echo "</td></tr></table></center>";
 	}
 	
 	function text_file_validate() {
