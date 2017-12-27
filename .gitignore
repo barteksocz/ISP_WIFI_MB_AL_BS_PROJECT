@@ -1,0 +1,7 @@
+*.json
+*.txt
+*.crt
+*.sh
+*.yml
+*.py
+node_modules/
