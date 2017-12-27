@@ -7,7 +7,7 @@ var sleeper = require('system-sleep');
 var _server = express();
 
 function isp_wait(){
-	sleeper(100);
+	sleeper(10);
 }
 
 _server.use(bodyParser.urlencoded({extended:true}));
