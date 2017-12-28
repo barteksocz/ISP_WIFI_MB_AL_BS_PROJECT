@@ -15,7 +15,15 @@ int16_t magnetic_sensor_read(void) {
 }
 
 int16_t distance_sensor_read(void) {
-	//trzeba uzupelnic
+	long measured_time;
+	digitalWrite(TRIG,HIGH);
+	delayMicroseconds(10);
+	digitalWrite(TRIG,LOW);
+	measured_time = pulseIn(ECHO,HIGH);
+	if ((measured_time == 0) || (measured_time >= TIME_THRESHOLD))
+		return SENSOR_ERROR;
+	else
+		return measured_time / DISTANCE_SENSOR_FACTOR;
 }
 
 int16_t temperature_sensor_read(void) {
