@@ -17,6 +17,7 @@
 #define DISTANCE_SENSOR_FACTOR 58
 #define TIME_THRESHOLD (58 * 200)
 
+void distance_sensor_init(void);
 int16_t magnetic_sensor_read(void);
 int16_t temperature_sensor_read(void);
 int16_t distance_sensor_read(void);

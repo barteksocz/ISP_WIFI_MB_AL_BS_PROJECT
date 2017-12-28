@@ -1,5 +1,10 @@
 #include "sensors.h"
 
+void distance_sensor_init(void) {
+	pinMode(TRIG,OUTPUT);
+	pinMode(ECHO,INPUT);
+}
+
 int16_t magnetic_sensor_read(void) {
 	int temp_data = analogRead(MAGNETIC_SENSOR_ANALOG_PIN);
 	if (temp_data <= MS_ADC_LOW_STATE_THRESHOLD)
@@ -12,14 +17,19 @@ int16_t magnetic_sensor_read(void) {
 
 int16_t distance_sensor_read(void) {
 	long measured_time;
+	int16_t temp_threshold = DISTANCE_SENSOR_FACTOR / 2;
 	digitalWrite(TRIG,HIGH);
 	delayMicroseconds(10);
 	digitalWrite(TRIG,LOW);
 	measured_time = pulseIn(ECHO,HIGH);
-	if ((measured_time == 0) || (measured_time >= TIME_THRESHOLD))
+	if ((measured_time <= 0) || (measured_time >= TIME_THRESHOLD))
 		return SENSOR_ERROR;
-	else
-		return measured_time / DISTANCE_SENSOR_FACTOR;
+	else {
+		if ((measured_time % DISTANCE_SENSOR_FACTOR) >= temp_threshold)	
+			return ((measured_time / DISTANCE_SENSOR_FACTOR) + 1);
+		else
+			return (measured_time / DISTANCE_SENSOR_FACTOR);
+	}
 }
 
 int16_t temperature_sensor_read(void) {
