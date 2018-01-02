@@ -1,5 +1,6 @@
 #include <SoftwareSerial.h>
 #include <SparkFunESP8266WiFi.h>
+#include "sensors.h"
 
 const char wifi_SSID[] = "UPC1131478";
 const char wifi_PSW[] = "UERGPQCM";
@@ -12,9 +13,9 @@ const String httpRequest = "POST /sensors_data HTTP/1.1\r\n"
                            "Transfer-Encoding: chunked\r\n"
                            "Connection: close\r\n\r\n";
 
-static int temperature_value = 2;
-static int magnetic_value = 3;
-static int distance_value = 4;
+static int temperature_value = 0;
+static int magnetic_value = 0;
+static int distance_value = 0;
 
 static ESP8266Client client;
 
@@ -46,7 +47,20 @@ String buildHttpBody() {
    return httpBody;
 }
 
+void updateSensorValue() {
+  magnetic_value = magnetic_sensor_read();
+  delay(400);
+
+  distance_value = distance_sensor_read();
+  delay(400);
+  
+  temperature_value = temperature_sensor_read();
+  delay(400);
+}
+
 void setup() {
+  distance_sensor_init();
+  
   Serial.begin(115200);
   while (esp8266.begin(115200) != true)
   {
@@ -58,8 +72,10 @@ void setup() {
 
 void loop() {
 
+      updateSensorValue();
+
       client.connect(server_address, server_port);
-       String httpBody = buildHttpBody();
+      String httpBody = buildHttpBody();
   
        client.print(httpRequest + httpBody.length() + "\r\n" + httpBody + "\r\n0\r\n\r\n");
   
