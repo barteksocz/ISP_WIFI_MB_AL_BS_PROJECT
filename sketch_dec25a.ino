@@ -9,9 +9,10 @@ const char server_address[] = "192.168.0.19";
 const int server_port = 99;
 
 const String httpRequest = "POST /sensors_data HTTP/1.1\r\n"
-                           "Host: 192.168.0.19\r\n"
-                           "Transfer-Encoding: chunked\r\n"
-                           "Connection: close\r\n\r\n";
+                           "Host: 192.168.0.19:99\r\n"
+                           "Content-Type: application/x-www-form-urlencoded\r\n"
+                           "Connection: close\r\n"
+                           "content-length: ";
 
 static int temperature_value = 0;
 static int magnetic_value = 0;
@@ -77,7 +78,7 @@ void loop() {
       client.connect(server_address, server_port);
       String httpBody = buildHttpBody();
   
-       client.print(httpRequest + httpBody.length() + "\r\n" + httpBody + "\r\n0\r\n\r\n");
+       client.print(httpRequest + httpBody.length() + "\r\n\r\n" + httpBody + "\r\n\r\n");
   
        delay(500);
        
