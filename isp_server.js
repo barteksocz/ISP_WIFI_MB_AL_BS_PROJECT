@@ -8,7 +8,7 @@ var request = require('request');
 var _server = express();
 
 _server.use(bodyParser.urlencoded({extended:true}));
-_server.listen(80,'127.0.0.1');
+_server.listen(99,'192.168.43.76');
 
 _server.post("/sensors_data",function(req,res) {
 	request({
