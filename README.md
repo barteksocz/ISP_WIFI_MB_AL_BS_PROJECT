@@ -1,3 +1,8 @@
+Projekt przygotowali:
+Michał Butkiewicz 149032
+Artur Ludwninowicz 170230
+Bartosz Soczyński 149107
+
 # Arduino + ESP8266 Sparkfun
 ![alt text](https://cdn.sparkfun.com/assets/learn_tutorials/4/0/3/angled.jpg)
 
